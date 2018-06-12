@@ -24,12 +24,15 @@ To use this, it is mandatory to keep a certain folder structure:
 ┣╸git (the repository folder)
 ┃ ┗╸saros (checkout with all needed projects)
 ┣╸workspaces
+┃ ┗╸your eclipse project
+┃ ┗╸created eclipse project folder for alice, bob, ...
 ┗╸docker (this git repo)
   ┗╸copy configuration.properties to git/saros/de.fu_berlin.inf.dpp/test/stf/de/fu_berlin/inf/dpp/stf/client
 ```
 
 ## usage
-`./testenv.sh`
+- start alice, bob, ... once via eclipse to create workspace folder
+- use script `./testenv.sh`
 
 ## java remote debug
 connect to 192.168.25.100:6006 for alice, 192.168.25.101:6006 for bob, ...
