@@ -17,6 +17,7 @@ Creates a docker container per eclipse instance and a dockerd xmpp server.
 Saros is complex, so this is a bit hacky.
 To use this, it is mandatory to keep a certain folder structure:
 
+```
 □ folder somewhere in your filesystem
 ┣╸eclipse
 ┣╸jdk
@@ -25,6 +26,7 @@ To use this, it is mandatory to keep a certain folder structure:
 ┣╸workspaces
 ┗╸docker (this git repo)
   ┗╸copy configuration.properties to git/saros/de.fu_berlin.inf.dpp/test/stf/de/fu_berlin/inf/dpp/stf/client
+```
 
 ## usage
 `./testenv.sh`
