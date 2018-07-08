@@ -32,8 +32,8 @@ check() {
     # filesystem rights trouble
     SAROSPATH=$(cd .. && pwd)
     echo "SAROSPATH: $SAROSPATH"
-    SAROSUSERNAME=$(ls -l $SAROSPATH | grep workspaces | cut -d ' ' -f 3)
-    SAROSUSERID=$(ls -n $SAROSPATH | grep workspaces | cut -d ' ' -f 3)
+    SAROSUSERNAME=$(ls -l $SAROSPATH | grep workspaces | tr -s ' ' | cut -d ' ' -f 3)
+    SAROSUSERID=$(ls -n $SAROSPATH | grep workspaces | tr -s ' ' | cut -d ' ' -f 3)
     echo "SAROSUSERNAME: $SAROSUSERNAME, SAROSUSERID: $SAROSUSERID"
 
     # check the structure
@@ -225,11 +225,11 @@ get_logs() {
                 "") echo "invalid option" ;;
                 "all") 
                     echo "$running" | while read -r vm; do
-                        x-terminal-emulator -e "docker logs -f $vm"
+                        x-terminal-emulator -e "bash -c \"while true; do docker logs -f $vm; done\""
                     done
                     break
                     ;;
-                 *) x-terminal-emulator -e "docker logs -f $opt"
+                 *) x-terminal-emulator -e "bash -c \"while true; do docker logs -f $opt; done\""
                     break
                     ;;
            esac
