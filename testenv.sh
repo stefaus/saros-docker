@@ -256,7 +256,7 @@ socat_restart() {
 # gets the eth1 inteface name of docker container (the one for the internal)
 get_interface() {
     grep -l \
-    "^$(docker exec saros-ejabberd bash -c 'cat /sys/class/net/eth0/iflink' |tr -d '\r')\$"\
+    "^$(docker exec $1 bash -c 'cat /sys/class/net/eth0/iflink' |tr -d '\r')\$"\
     /sys/class/net/veth*/ifindex | cut -d '/' -f 5
 }
 
