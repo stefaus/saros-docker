@@ -225,11 +225,11 @@ get_logs() {
                 "") echo "invalid option" ;;
                 "all") 
                     echo "$running" | while read -r vm; do
-                        x-terminal-emulator -e "bash -c \"while true; do docker logs -f $vm; done\""
+                        x-terminal-emulator -e "bash -c \"while true; do docker logs -f $vm ; sleep 3; done\""
                     done
                     break
                     ;;
-                 *) x-terminal-emulator -e "bash -c \"while true; do docker logs -f $opt; done\""
+                 *) x-terminal-emulator -e "bash -c \"while true; do docker logs -f $opt; sleep 3; done\""
                     break
                     ;;
            esac
@@ -256,7 +256,7 @@ socat_restart() {
 # gets the eth1 inteface name of docker container (the one for the internal)
 get_interface() {
     grep -l \
-    $(docker exec $1 bash -c 'cat /sys/class/net/eth0/iflink' |tr -d '\r')\
+    "^$(docker exec saros-ejabberd bash -c 'cat /sys/class/net/eth0/iflink' |tr -d '\r')\$"\
     /sys/class/net/veth*/ifindex | cut -d '/' -f 5
 }
 
@@ -264,11 +264,12 @@ get_interface() {
 limit_connection() {
     while true
     do
-        interface=$(get_interface $1 || true)
-        if [ -z $interface ]; then
+        interface="$(get_interface $1 || true)"
+        if [ -z "$interface" ]; then
             sleep 0.5
             continue
         fi
+
         sudo tc qdisc del dev $interface root 2>/dev/null || true
         sudo tc qdisc add dev $interface root handle 1:0 netem delay $3ms
         sudo tc qdisc add dev $interface parent 1:1 handle 10: tbf rate $2mbit burst 15k latency 50ms
