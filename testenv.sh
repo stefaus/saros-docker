@@ -105,6 +105,7 @@ start_ejabberd() {
             --env "EJABBERD_PROTOCOL_OPTIONS_TLSV1=true" \
             --volumes-from saros-data-ejabberd \
             -v /dev/null:/opt/ejabberd/scripts/post/10_ejabberd_modules_update_specs.sh\
+            -p 5280:5280 \
             rroemhild/ejabberd >/dev/null
 
         #docker network connect --ip 192.168.26.10 saros-net saros-ejabberd
@@ -131,7 +132,7 @@ start_client() {
                bash $SAROSPATH/docker/stfclient.sh >/dev/null
 
         docker network connect --ip ${swthosts[$1]} saros-swt $1
-        open_ports $1&
+        #open_ports $1&
         echo "$1 started"
     fi
 }

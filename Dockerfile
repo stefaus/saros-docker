@@ -1,5 +1,5 @@
 # Docker File for saros-eclipse
-FROM ubuntu:latest
+FROM ubuntu:16.04
 LABEL maintainer="Stefan Moll <stefan@stefaus.de>"
 
 # install packages

@@ -43,7 +43,7 @@ jdk/bin/java \
    -Dde.fu_berlin.inf.dpp.debug=true \
    -Dde.fu_berlin.inf.dpp.testmode=$PORT \
    -Dde.fu_berlin.inf.dpp.sleepTime=200 \
-   -Djava.rmi.server.hostname=localhost \
+   -Djava.rmi.server.hostname=$IP \
    -Dorg.eclipse.swtbot.keyboard.strategy=org.eclipse.swtbot.swt.finder.keyboard.MockKeyboardStrategy \
    -Dorg.eclipse.swtbot.keyboard.layout=de.fu_berlin.inf.dpp.stf.server.bot.default \
    -Duser.language=en \
